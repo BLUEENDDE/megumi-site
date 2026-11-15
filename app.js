@@ -305,6 +305,14 @@ loadData().then(() => {
   applyFilter();
   // 便于截图/直达：?w=单词 打开详情，?quiz=1 直接开始测验
   const params = new URLSearchParams(location.search);
+  const lv = params.get('level');
+  if (lv) {
+    document.querySelectorAll('.pill').forEach((p) => {
+      p.classList.toggle('active', p.dataset.level === lv);
+    });
+    state.level = lv === 'book' ? -1 : Number(lv);
+    applyFilter();
+  }
   const word = params.get('w');
   if (word) {
     const entry = state.entries.find((e) => e.w === word);
