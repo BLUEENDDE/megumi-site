@@ -315,7 +315,8 @@ loadData().then(() => {
   }
   const word = params.get('w');
   if (word) {
-    const entry = state.entries.find((e) => e.w === word);
+    const src = state.level === -1 ? state.newBase : state.entries;
+    const entry = src.find((e) => e.w === word) || state.entries.find((e) => e.w === word);
     if (entry) openDetail(entry);
   }
   if (params.get('quiz') === '1') startQuiz();
